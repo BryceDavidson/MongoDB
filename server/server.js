@@ -7,9 +7,12 @@ var bodyParser = require('body-parser');
 var {
     mongoose
 } = require('./db/mongoose');
+//this gets the exported mongoose method from the file
 var {
     Todo
 } = require('./models/todo');
+// this gets the exported constructor A.K.A a model from the file
+// models are parsed with mongoose and needs mongoose as a depend to work
 var {
     User
 } = require('./models/users');
@@ -45,3 +48,7 @@ app.post('/todos', (req, res) => {
 app.listen(3000, () => {
     console.log('Server has started on port 3000');
 });
+
+module.exports = {
+    app
+};
