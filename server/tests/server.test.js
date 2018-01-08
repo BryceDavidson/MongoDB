@@ -9,7 +9,7 @@ const {
 } = require('./../models/todo');
 
 beforeEach((done) => {
-    Todo.remove({}).then(() => done())
+    Todo.remove({}).then(() => done());
 });
 
 describe('POST /todos', () => {

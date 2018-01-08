@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 // 
 app.post('/todos', (req, res) => {
     var todo = new Todo({
-        // here we are syaing that the keys of our contructed Todo are = to the parsed JSON data we posted with from post man, A.K.A the body.
+        // here we are saying that the keys of our contructed Todo are = to the parsed JSON data we posted with from post man, A.K.A the body.
         // so text = the text key from the body, parsed thanks to bodyParser
         text: req.body.text,
         completed: req.body.completed
@@ -39,6 +39,16 @@ app.post('/todos', (req, res) => {
         res.send(doc);
         console.log(JSON.stringify(doc, undefined, 2));
     }, (e) => {
+        res.status(400).send(e);
+    });
+});
+
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({
+            todos,
+        })
+    }, (err) => {
         res.status(400).send(e);
     });
 });
