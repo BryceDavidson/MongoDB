@@ -1,6 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
+const {
+    ObjectId
+} = require('mongodb');
 
 // remember to keep a space between local and non-local requires
 // we use ES6 Object decuntruction to select a method from the exports of a file
@@ -52,7 +54,26 @@ app.get('/todos', (req, res) => {
         res.status(400).send(e);
     });
 });
+app.get('/todos/:id', (req, res) => {
+    var id = req.params.id;
 
+    if (!ObjectId.isValid(id)) {
+        return res.status(404).send({
+            "this is your id": id
+        });
+    }
+
+    Todo.findById(id).then((todo) => {
+
+        if (!todo) {
+            return res.status(404).send("No To DO");
+        }
+        console.log(JSON.stringify(todo, undefined, 2));
+        res.status(200).send(todo);
+    }).catch((e) => {
+        res.status(404).send({});
+    });
+});
 
 
 app.listen(3000, () => {
