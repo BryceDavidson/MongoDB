@@ -39,7 +39,7 @@ app.post('/todos', (req, res) => {
     //here we are saying when the post is created and todo is created we then want to save it into the DB
     todo.save().then((doc) => {
         res.send(doc);
-        console.log(JSON.stringify(doc, undefined, 2));
+        //console.log(JSON.stringify(doc, undefined, 2));
     }, (e) => {
         res.status(400).send(e);
     });
@@ -68,8 +68,10 @@ app.get('/todos/:id', (req, res) => {
         if (!todo) {
             return res.status(404).send("No To DO");
         }
-        console.log(JSON.stringify(todo, undefined, 2));
-        res.status(200).send(todo);
+        //console.log(JSON.stringify(todo, undefined, 2));
+        res.status(200).send({
+            todo
+        });
     }).catch((e) => {
         res.status(404).send({});
     });
