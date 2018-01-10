@@ -19,9 +19,9 @@ var {
     User
 } = require('./models/users');
 
+const port = process.env.PORT || 3000;
 // remember to save express as a var as app for better shit and easier coding
 var app = express();
-
 // app.use makes sure that between the req and the res this stuff () happens
 // so here we are making sure to tell bodyParser that the body we will be getting will be JSON data, and it will parse it as such
 app.use(bodyParser.json());
@@ -78,8 +78,8 @@ app.get('/todos/:id', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log('Server has started on port 3000');
+app.listen(port, () => {
+    console.log(`Server started on port: ${port}`);
 });
 
 module.exports = {
